@@ -1,8 +1,11 @@
 <?php
 
-namespace Alura\Banco\Modelo;
+namespace Alura\Banco\Modelo\Funcionario;
 
-class Funcionario extends Pessoa
+use Alura\Banco\Modelo\Pessoa;
+use Alura\Banco\Modelo\CPF;
+
+abstract class Funcionario extends Pessoa
 {
     private string $cargo;
     private float $salario;
@@ -33,5 +36,15 @@ class Funcionario extends Pessoa
     public function calculaBonificao(): float
     {
         return $this->salario * 0.1;
+    }
+
+    public function recebeAumento(float $valorAumento): void
+    {
+        if ($valorAumento < 0) {
+            echo "O aumento deve ser positivo!" . PHP_EOL;
+            return;
+        }
+
+        $this->salario += $valorAumento;
     }
 }
